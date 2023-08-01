@@ -1,0 +1,100 @@
+import { confirmEmail } from '@/api/user'
+import CircleLoading from '@/components/UIKit/CircleLoading'
+import useMutation from '@/hooks/useMutation'
+import { updateUserState } from '@/redux/slices/user'
+import { useAppDispatch } from '@/redux/store'
+import { FC, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+const Confirmation: FC = () => {
+  const dispatch = useAppDispatch()
+
+  const { search } = useLocation()
+
+  const navigate = useNavigate()
+
+  const { mutateAsync, isLoading, error, isError, isSuccess } = useMutation(confirmEmail)
+
+  useEffect(() => {
+    ;(async () => {
+      const token = new URLSearchParams(search).get('token')
+
+      try {
+        const data = await mutateAsync(token || '')
+
+        window.localStorage.setItem('access_token', data.access_token)
+        window.localStorage.setItem('refresh_token', data.refresh_token)
+
+        dispatch(
+          updateUserState({
+            user: data.user,
+            loadingState: {
+              isLoading: false,
+              isError: false,
+              isSuccess: true,
+            },
+            isUnauthorized: false,
+          })
+        )
+
+        navigate('/')
+      } catch (e) {}
+    })()
+  }, [])
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTimeout(() => {
+        navigate('/')
+      }, 7500)
+    }
+  }, [isSuccess])
+
+  let message: string = ''
+
+  if (isSuccess) {
+    message = 'Емейл підтверджено. Через кілька секунд ми перенаправимо вас на головну'
+  } else if ((error as any)?.response?.data?.message) {
+    message = (error as any).response.data.message
+  } else if (isError) {
+    message = 'Помилка при перевірці даних'
+  }
+
+  return (
+    <div className="h-screen w-screen flex justify-center items-center">
+      <div className="px-8 py-12 lg:px-16 sm:rounded shadow bg-white relative h-[360px] w-[450px] flex justify-center">
+        <div>
+          <div className="flex justify-center mb-6">
+            <svg
+              aria-hidden="true"
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="3.84003" y="2.88" width="40.32" height="40.32" rx="8" fill="white" />
+              <path
+                d="M14.0469 29.7969L18.2031 33.9531L16.7812 35.375H15.25V32.75H12.625V31.2188L14.0469 29.7969ZM25.3672 19.1328C25.6224 19.3698 25.5951 19.6432 25.2852 19.9531L17.3281 27.9102C17.0182 28.2201 16.7448 28.2474 16.5078 27.9922C16.2526 27.7552 16.2799 27.4818 16.5898 27.1719L24.5469 19.2148C24.8568 18.9049 25.1302 18.8776 25.3672 19.1328ZM17.875 38L32.75 23.125L24.875 15.25L10 30.125V38H17.875ZM34.5 21.375L37.0156 18.8594C37.526 18.349 37.7812 17.7292 37.7812 17C37.7812 16.2708 37.526 15.651 37.0156 15.1406L32.8594 10.9844C32.349 10.474 31.7292 10.2188 31 10.2188C30.2708 10.2188 29.651 10.474 29.1406 10.9844L26.625 13.5L34.5 21.375ZM45 10.875V37.125C45 39.2943 44.2298 41.1491 42.6895 42.6895C41.1491 44.2298 39.2943 45 37.125 45H10.875C8.70573 45 6.85091 44.2298 5.31055 42.6895C3.77018 41.1491 3 39.2943 3 37.125V10.875C3 8.70573 3.77018 6.85091 5.31055 5.31055C6.85091 3.77018 8.70573 3 10.875 3H37.125C39.2943 3 41.1491 3.77018 42.6895 5.31055C44.2298 6.85091 45 8.70573 45 10.875Z"
+                fill="#121212"
+              />
+            </svg>
+          </div>
+          <h1 className="text-2xl text-center font-bold mb-6">Підтвердження Email</h1>
+          {isLoading ? (
+            <div className="flex justify-center mb-20">
+              <CircleLoading />
+            </div>
+          ) : (
+            <p className="text-center text-neutral-400 text-sm mb-20">{message}</p>
+          )}
+          <p className="text-center text-sm text-sky-500 hover:text-sky-600 transition-colors">
+            <a href="/">На головну</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Confirmation

@@ -1,0 +1,51 @@
+{
+  "name": "client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.15",
+    "@lexical/code": "^0.11.2",
+    "@lexical/link": "^0.11.2",
+    "@lexical/list": "^0.11.2",
+    "@lexical/react": "^0.11.2",
+    "@react-oauth/google": "^0.11.1",
+    "@reduxjs/toolkit": "^1.9.5",
+    "async-mutex": "^0.4.0",
+    "axios": "^1.4.0",
+    "formik": "^2.4.2",
+    "lexical": "^0.11.2",
+    "react": "^18.2.0",
+    "react-content-loader": "^6.2.1",
+    "react-dnd": "^16.0.1",
+    "react-dnd-touch-backend": "^16.0.1",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.1",
+    "react-router-dom": "^6.14.1",
+    "react-transition-group": "^4.4.5",
+    "url": "^0.11.1",
+    "yup": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-transition-group": "^4.4.6",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9"
+  }
+}

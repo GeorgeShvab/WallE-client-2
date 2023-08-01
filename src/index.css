@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --theme-color: #48a391;
+  --theme-color-light: #8dd8c9;
+  --black-light: #282828;
+  --black-dark: #060606;
+  --black-main: #080808;
+}
+
+body {
+  overflow: hidden;
+}
+
+.spinner {
+  -webkit-animation: rotator 1.6s linear infinite;
+  animation: rotator 1.6s linear infinite;
+}
+
+@-webkit-keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+}
+
+.path {
+  stroke-dasharray: 70;
+  stroke-dashoffset: 0;
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+  -webkit-animation: dash 1.6s ease-in-out infinite;
+  animation: dash 1.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 70;
+  }
+  50% {
+    stroke-dashoffset: 20;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 70;
+    -webkit-transform: rotate(450deg);
+    transform: rotate(450deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 70;
+  }
+  50% {
+    stroke-dashoffset: 20;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 70;
+    -webkit-transform: rotate(450deg);
+    transform: rotate(450deg);
+  }
+}
+
+.document-enter {
+  height: 0px;
+  overflow: hidden;
+}
+.document-enter-active {
+  height: 40px;
+  transition: height cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  overflow: hidden;
+}
+.document-exit {
+  height: 40px;
+  overflow: hidden;
+}
+.document-exit-active {
+  height: 0px;
+  transition: height cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  overflow: hidden;
+}
+
+.folder-enter {
+  height: 0px;
+  overflow: hidden;
+}
+.folder-enter-active {
+  height: 40px;
+  transition: height cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  overflow: hidden;
+}
+.folder-exit {
+  height: 40px;
+  overflow: hidden;
+}
+.folder-exit-active {
+  height: 0px;
+  transition: height cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  overflow: hidden;
+}
+
+.popover-entering {
+  opacity: 0;
+}
+.popover-entered {
+  opacity: 1;
+  transition: opacity linear 0.1s;
+}
+.popover-exiting {
+  opacity: 1;
+}
+.popover-exited {
+  opacity: 0;
+  transition: opacity linear 0.1s;
+}
+
+@media screen and (min-width: 1024px) {
+  .pretty-scrollbar::-webkit-scrollbar {
+    width: 0;
+    border-radius: 2px;
+  }
+
+  .pretty-scrollbar::-webkit-scrollbar-track {
+    background: #f2f2f2;
+  }
+
+  .pretty-scrollbar::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+  }
+}
+
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.alert-error {
+  background-color: #fdeded;
+  color: #5f2120;
+}
+
+.alert-success {
+  background-color: #edf7ed;
+  color: #1e4620;
+}
+
+.alert-info {
+  background-color: #e5f6fd;
+  color: #014361;
+}
+
+.alert-warning {
+  background-color: #fff4e5;
+  color: #663c00;
+}
+
+.lexical-editor {
+  outline: none;
+}
+
+.editor-root {
+  min-height: calc(100vh - 127px);
+}
+
+.editor-root.editable {
+  min-height: calc(100vh - 168px);
+}
+
+@media screen and (min-width: 768px) {
+  .pretty-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .pretty-scrollbar::-webkit-scrollbar-track {
+    background: #f2f2f2;
+  }
+
+  .pretty-scrollbar::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+  }
+}
