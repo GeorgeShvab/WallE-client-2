@@ -33,7 +33,7 @@ const ShareDocument: FC<Props> = ({ onClose, open, title, id }) => {
           <div className="mb-8">
             <p className="mb-5 text-sm">Посилання на ваш документ:</p>
             <div className="flex items-center gap-3 justify-between">
-              <div className="p-2 w-[calc(100%-52px)] flex-1 rounded bg-neutral-100 text-xs h-10 flex-1 flex items-center">
+              <div className="p-2 w-[calc(100%-52px)] flex-1 rounded bg-neutral-100 text-xs min-h-[40px] flex-1 flex items-center">
                 <p className="break-words w-full">{document.location.href}</p>
               </div>
               <IconButton className="flex-[0_0_40px]" onClick={handleCopyLink}>
@@ -54,7 +54,7 @@ const ShareDocument: FC<Props> = ({ onClose, open, title, id }) => {
               </IconButton>
             </div>
           </div>
-          <Button color="theme" onClick={() => onClose()} fullWidth>
+          <Button color="theme" className="w-full" onClick={() => onClose()} fullWidth>
             Готово
           </Button>
         </>

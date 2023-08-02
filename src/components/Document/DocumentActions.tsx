@@ -6,6 +6,7 @@ import { useAppDispatch } from '@/redux/store'
 import { Document } from '@/types'
 import { FC, memo, useState } from 'react'
 import DialogInput from '@/components/UIKit/DialogInput'
+import { useNavigate, useParams } from 'react-router-dom'
 
 interface State {
   isAccessModalOpened: boolean
@@ -18,6 +19,10 @@ interface State {
 const DocumentActions: FC<Document & { className?: string }> = ({ className, ...props }) => {
   const dispatch = useAppDispatch()
 
+  const navigate = useNavigate()
+
+  const { document } = useParams()
+
   const [state, setState] = useState<State>({
     isAccessModalOpened: false,
     isInvitationModalOpened: false,
@@ -27,8 +32,12 @@ const DocumentActions: FC<Document & { className?: string }> = ({ className, ...
 
   const changeState = (param: Partial<State>) => setState((prev) => ({ ...prev, ...param }))
 
-  const deleteDoc = () => {
-    dispatch(deleteDocumentAsyncAction(props.id))
+  const deleteDoc = async () => {
+    await dispatch(deleteDocumentAsyncAction(props.id))
+
+    if (props.id === document) {
+      navigate('/')
+    }
   }
 
   const handleUpdateTitle = (title: string) => {

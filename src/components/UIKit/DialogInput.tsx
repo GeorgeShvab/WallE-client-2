@@ -57,7 +57,7 @@ const DialogInput: FC<Props> = ({
           <input
             type="text"
             name="text"
-            className="mb-2 bg-neutral-100 rounded p-2 w-full text-neutral-700 outline-none"
+            className={`bg-neutral-100 rounded p-2 w-full text-neutral-700 outline-none ${error ? 'mb-2' : 'mb-8'}`}
             placeholder={placeholder || ''}
             onInput={handleInput}
             value={value}

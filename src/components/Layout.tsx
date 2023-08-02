@@ -23,7 +23,7 @@ const Layout: FC<{ children: ReactElement }> = ({ children }) => {
     endX: undefined,
   })
 
-  const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false)
+  const [isMenuOpened, setIsMenuOpened] = useState<boolean>(window.screen.width < 768)
 
   const handleTouchStart = (e: TouchEvent) => {
     if (touches.current) {
