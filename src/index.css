@@ -184,6 +184,10 @@ body {
   min-height: calc(100vh - 127px);
 }
 
+.editor-root * {
+  word-break: break-all !important;
+}
+
 .editor-root.editable {
   min-height: calc(100vh - 168px);
 }

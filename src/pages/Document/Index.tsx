@@ -55,7 +55,7 @@ const DocumentContainer: FC = () => {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-[calc(100vw-280px)]">
       {data.document && (
         <LexicalComposer
           key={data.document.id + data.loadingState.isLoading}
