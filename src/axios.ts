@@ -46,7 +46,13 @@ axios.interceptors.response.use(
           originalRequest.headers.Authorization = `Bearer ${data.access_token}`
 
           return axios(originalRequest)
-        } catch (e) {
+        } catch (e: any) {
+          if (e?.response?.status === 401) {
+            window.localStorage.clear()
+            window.location = '/signin' as any
+            return
+          }
+
           return Promise.reject(e)
         } finally {
           release()
